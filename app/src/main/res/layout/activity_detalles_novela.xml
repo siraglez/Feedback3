@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="@color/colorBackground">
+
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="24sp"
+        android:textColor="@color/textColor"
+    android:layout_marginBottom="8dp"
+    android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tvAuthor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:textColor="@color/textColor"
+    android:layout_marginBottom="4dp" />
+
+    <TextView
+        android:id="@+id/tvYear"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:textColor="@color/textColor"
+    android:layout_marginBottom="4dp" />
+
+    <TextView
+        android:id="@+id/tvSynopsis"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:textColor="@color/textColor"
+    android:layout_marginBottom="16dp" />
+
+    <Button
+        android:id="@+id/btnToggleFavorite"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Marcar como Favorita"
+        android:layout_marginBottom="16dp"
+        android:backgroundTint="@color/colorPrimary"
+    android:textColor="@color/textColor" />
+
+    <EditText
+        android:id="@+id/etReview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Escribe tu reseña aquí"
+        android:inputType="textMultiLine"
+        android:lines="4"
+        android:maxLines="6"
+        android:background="@color/colorBackground"
+    android:textColor="@color/textColor" />
+
+    <Button
+        android:id="@+id/btnAddReview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Agregar Reseña"
+        android:layout_gravity="end"
+        android:layout_marginTop="16dp"
+        android:backgroundTint="@color/colorPrimaryDark"
+    android:textColor="@color/textColor" />
+
+</LinearLayout>
