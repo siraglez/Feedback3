@@ -14,10 +14,15 @@ object ThemeUtils {
         }
     }
 
+    //Función para obtener la preferencia del tema
+    fun obtenerPreferenciaTema(context: Context): Boolean {
+        val prefs = context.getSharedPreferences("PreferenciasTema", Context.MODE_PRIVATE)
+        return prefs.getBoolean("modo_noche", false)
+    }
+
     //Función para aplicar el tema en base a la preferencia guardada
     fun aplicarTema(context: Context) {
-        val prefs = context.getSharedPreferences("PreferenciasTema", Context.MODE_PRIVATE)
-        val esModoNoche = prefs.getBoolean("modo_noche", false)
+        val esModoNoche = obtenerPreferenciaTema(context)
         AppCompatDelegate.setDefaultNightMode(
             if (esModoNoche) AppCompatDelegate.MODE_NIGHT_YES else AppCompatDelegate.MODE_NIGHT_NO
         )
