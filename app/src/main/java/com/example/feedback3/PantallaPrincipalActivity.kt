@@ -14,14 +14,10 @@ class PantallaPrincipalActivity : AppCompatActivity() {
     private lateinit var adapter: NovelaAdapter
     private var novelas: MutableList<Novela> = mutableListOf()
     private lateinit var dbHelper: NovelaDatabaseHelper
-    private lateinit var sharedPreferences: SharedPreferences
-    private var isNightMode: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        sharedPreferences = getSharedPreferences("MyPrefs", MODE_PRIVATE)
-        isNightMode = sharedPreferences.getBoolean("nightMode", false)
-        setTheme(if (isNightMode) R.style.Theme_Night else R.style.Theme_Day)
+        ThemeUtils.aplicarTema(this)
 
         setContentView(R.layout.activity_pantalla_principal)
 
@@ -43,19 +39,16 @@ class PantallaPrincipalActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        //Configurar el botón para cambiar el tema
         val btnCambiarTema = findViewById<Button>(R.id.btnCambiarTema)
-        btnCambiarTema.text = if (isNightMode) "Noche" else "Día"
+        val esModoNoche = ThemeUtils.obtenerPreferenciaTema(this)
+        btnCambiarTema.text = if (esModoNoche) "Noche" else "Día"
 
         btnCambiarTema.setOnClickListener {
-            toggleTheme(btnCambiarTema)
+            ThemeUtils.guardarPreferenciaTema(this, !esModoNoche)
+            ThemeUtils.aplicarTema(this)
+            recreate()
         }
-    }
-
-    private fun toggleTheme(button: Button) {
-        isNightMode = !isNightMode // Cambia el estado del tema
-        sharedPreferences.edit().putBoolean("nightMode", isNightMode).apply() // Guarda la preferencia
-        button.text = if (isNightMode) "Día" else "Noche"
-        recreate() // Recrea la actividad para aplicar el nuevo tema
     }
 
     // Cargar todas las novelas desde la base de datos SQLite
