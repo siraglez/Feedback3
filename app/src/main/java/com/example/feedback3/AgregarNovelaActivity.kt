@@ -18,6 +18,7 @@ class AgregarNovelaActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        ThemeUtils.aplicarTema(this)
         setContentView(R.layout.activity_agregar_novela)
 
         //Inicializar la base de datos

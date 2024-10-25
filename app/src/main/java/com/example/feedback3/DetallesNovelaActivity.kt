@@ -22,6 +22,7 @@ class DetallesNovelaActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        ThemeUtils.aplicarTema(this)
         setContentView(R.layout.activity_detalles_novela)
 
         // Inicializa las vistas
