@@ -57,6 +57,7 @@ dependencies {
     implementation(libs.androidx.navigation.ui.ktx)
     implementation(libs.material)
     implementation(libs.androidx.recyclerview)
+    implementation(libs.androidx.runtime.saved.instance.state)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
