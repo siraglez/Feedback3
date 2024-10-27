@@ -12,6 +12,6 @@
     <color name="colorPrimaryDarkNight" tools:ignore="MissingDefaultResource">#4B0082</color> <!-- Morado oscuro -->
     <color name="colorBackgroundNight" tools:ignore="MissingDefaultResource">#2E2E2E</color> <!-- Gris oscuro -->
     <color name="textColorNight" tools:ignore="MissingDefaultResource">#FFFFFF</color> <!-- Blanco -->
-    <color name="colorFavoritoDark" tools:ignore="MissingDefaultResource">#FFFF10</color> <!-- Amarillo -->
+    <color name="colorFavoritoNight" tools:ignore="MissingDefaultResource">#FFFF10</color> <!-- Amarillo -->
 </resources>
 
