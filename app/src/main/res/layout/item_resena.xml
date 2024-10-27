@@ -3,18 +3,19 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="8dp">
+    android:padding="8dp"
+    android:background="@color/colorBackground">
 
     <TextView
         android:id="@+id/textViewResena"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="?android:textColor" />
+        android:textColor="@color/textColor" />
 
     <TextView
         android:id="@+id/textViewResenaAutor"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="?android:textColor"
+        android:textColor="@color/textColor"
         android:textSize="12sp"/>
 </LinearLayout>

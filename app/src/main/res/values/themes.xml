@@ -1,5 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="Theme.Feedback3" parent="android:Theme.Material.Light.NoActionBar" />
+    <style name="Theme.Feedback3.Day" parent="Theme.Day" >
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="android:background">@color/colorBackground</item>
+        <item name="android:textColor">@color/textColor</item>
+    </style>
+
+    <style name="Theme.Feedback3.Night" parent="Theme.Night" >
+        <item name="colorPrimary">@color/colorPrimaryNight</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDarkNight</item>
+        <item name="android:background">@color/colorBackgroundNight</item>
+        <item name="android:textColor">@color/textColorNight</item>
+    </style>
 </resources>

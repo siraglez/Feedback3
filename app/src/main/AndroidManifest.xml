@@ -11,7 +11,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Day">
+        android:theme="@style/Theme.Feedback3.Day">
         <activity android:name=".actividades.LoginActivity"
             android:exported="true">
             <intent-filter>
@@ -22,23 +22,19 @@
     <activity
             android:name=".actividades.MainActivity"
             android:exported="true"
-            android:label="@string/app_name"
-            android:theme="@style/Theme.Day"/>
+            android:label="@string/app_name"/>
         <activity
             android:name=".actividades.AgregarNovelaActivity"
             android:exported="true"
-            android:label="@string/app_name"
-            android:theme="@style/Theme.Day"/>
+            android:label="@string/app_name"/>
         <activity
             android:name=".actividades.DetallesNovelaActivity"
             android:exported="true"
-            android:label="@string/app_name"
-            android:theme="@style/Theme.Day"/>
+            android:label="@string/app_name"/>
         <activity
             android:name=".actividades.ConfiguracionActivity"
             android:exported="true"
-            android:label="@string/app_name"
-            android:theme="@style/Theme.Day"/>
+            android:label="@string/app_name"/>
     </application>
 
 </manifest>

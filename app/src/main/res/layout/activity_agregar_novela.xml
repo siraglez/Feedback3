@@ -4,14 +4,16 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="16dp"
-    android:background="?android:background">
+    android:background="@color/colorBackground">
 
     <EditText
         android:id="@+id/etTitulo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Título"
-        android:minHeight="48dp" />
+        android:minHeight="48dp"
+        android:textColor="@color/textColor"
+        android:backgroundTint="@color/colorPrimary"/>
 
     <EditText
         android:id="@+id/etAutor"
@@ -19,7 +21,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:hint="Autor"
-        android:minHeight="48dp" />
+        android:minHeight="48dp"
+        android:textColor="@color/textColor"
+        android:backgroundTint="@color/colorPrimary"/>
 
     <EditText
         android:id="@+id/etAnio"
@@ -27,7 +31,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:hint="Año de Publicación"
-        android:minHeight="48dp" />
+        android:minHeight="48dp"
+        android:textColor="@color/textColor"
+        android:backgroundTint="@color/colorPrimary"/>
 
     <EditText
         android:id="@+id/etSinopsis"
@@ -35,12 +41,16 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:hint="Sinopsis"
-        android:minHeight="48dp" />
+        android:minHeight="48dp"
+        android:textColor="@color/textColor"
+        android:backgroundTint="@color/colorPrimary"/>
 
     <Button
         android:id="@+id/btnGuardar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Guardar Novela"
-        android:layout_marginTop="16dp"/>
+        android:layout_marginTop="16dp"
+        android:textColor="@color/textColor"
+        android:backgroundTint="@color/colorPrimaryDark"/>
 </LinearLayout>
