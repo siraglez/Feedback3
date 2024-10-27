@@ -37,14 +37,14 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/buttonBackup"
+        android:id="@+id/btnBackup"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="Realizar Copia de Seguridad" />
 
     <Button
-        android:id="@+id/buttonRestore"
+        android:id="@+id/btnRestore"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"

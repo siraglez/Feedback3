@@ -7,14 +7,14 @@
     android:background="?android:background">
 
     <EditText
-        android:id="@+id/editTextTitulo"
+        android:id="@+id/etTitulo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Título"
         android:minHeight="48dp" />
 
     <EditText
-        android:id="@+id/editTextAutor"
+        android:id="@+id/etAutor"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -22,7 +22,7 @@
         android:minHeight="48dp" />
 
     <EditText
-        android:id="@+id/editTextAnio"
+        android:id="@+id/etAnio"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -30,7 +30,7 @@
         android:minHeight="48dp" />
 
     <EditText
-        android:id="@+id/editTextSinopsis"
+        android:id="@+id/etSinopsis"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -38,7 +38,7 @@
         android:minHeight="48dp" />
 
     <Button
-        android:id="@+id/buttonGuardar"
+        android:id="@+id/btnGuardar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Guardar Novela"

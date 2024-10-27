@@ -43,6 +43,25 @@ class UsuarioDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABA
         return existe
     }
 
+    fun obtenerUsuarios(): List<Usuario> {
+        val usuarios = mutableListOf<Usuario>()
+        val db = readableDatabase
+        val cursor = db.rawQuery("SELECT * FROM usuarios", null)
+
+        if (cursor.moveToFirst()) {
+            do {
+                val email = cursor.getString(cursor.getColumnIndexOrThrow("email"))
+                val password = cursor.getString(cursor.getColumnIndexOrThrow("password"))
+                val temaOscuro = cursor.getInt(cursor.getColumnIndexOrThrow("temaOscuro")) == 1
+                usuarios.add(Usuario(email, password, temaOscuro))
+            } while (cursor.moveToNext())
+        }
+
+        cursor.close()
+        db.close()
+        return usuarios
+    }
+
     fun obtenerTemaUsuario(email: String): Boolean {
         val db = readableDatabase
         val cursor = db.rawQuery("SELECT temaOscuro FROM usuarios WHERE email = ?", arrayOf(email))

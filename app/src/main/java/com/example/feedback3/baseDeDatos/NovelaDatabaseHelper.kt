@@ -29,7 +29,7 @@ class NovelaDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABAS
             put("autor", novela.autor)
             put("anioPublicacion", novela.anioPublicacion)
             put("sinopsis", novela.sinopsis)
-            put("esFavorita", novela.esFavorita)
+            put("esFavorita", if (novela.esFavorita) 1 else 0)
         }
         db.insert("novelas", null, values)
         db.close()
