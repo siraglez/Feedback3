@@ -13,6 +13,7 @@ import com.example.feedback3.adaptadores.NovelaAdapter
 
 class MainActivity : AppCompatActivity() {
     private lateinit var novelaDbHelper: NovelaDatabaseHelper
+    private lateinit var adapter: NovelaAdapter
     private lateinit var listViewNovelas: ListView
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -21,6 +22,10 @@ class MainActivity : AppCompatActivity() {
 
         novelaDbHelper = NovelaDatabaseHelper(this)
         listViewNovelas = findViewById(R.id.listViewNovelas)
+
+        adapter = NovelaAdapter(this, mutableListOf())
+        listViewNovelas.adapter = adapter
+
         mostrarNovelas()
 
         findViewById<Button>(R.id.btnAgregarNovela).setOnClickListener {
@@ -45,11 +50,18 @@ class MainActivity : AppCompatActivity() {
 
     private fun mostrarNovelas() {
         val novelas = novelaDbHelper.obtenerNovelas()
+
         if (novelas.isNotEmpty()) {
-            val adapter = NovelaAdapter(this, novelas)
-            listViewNovelas.adapter = adapter
+            adapter.clear()
+            adapter.addAll(novelas)
+            adapter.notifyDataSetChanged()
         } else {
             Toast.makeText(this, "No hay novelas disponibles", Toast.LENGTH_SHORT).show()
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        mostrarNovelas()
     }
 }

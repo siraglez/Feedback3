@@ -1,6 +1,5 @@
 package com.example.feedback3.actividades
 
-import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.widget.Button
@@ -20,12 +19,17 @@ class ConfiguracionActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        // Inicializa sharedPreferences antes de usarla
+        sharedPreferences = getSharedPreferences("UsuarioPreferences", MODE_PRIVATE)
+
+        // Ahora puedes acceder a sharedPreferences para obtener el valor de temaOscuro
         val temaOscuro = sharedPreferences.getBoolean("temaOscuro", false)
         aplicarTema(temaOscuro)
+
         setContentView(R.layout.activity_configuracion)
 
         usuarioDbHelper = UsuarioDatabaseHelper(this)
-        sharedPreferences = getSharedPreferences("UsuarioPreferences", MODE_PRIVATE)
 
         val switchTemaNoche = findViewById<Switch>(R.id.switchTema)
         val btnBackup = findViewById<Button>(R.id.btnBackup)
@@ -36,6 +40,12 @@ class ConfiguracionActivity : AppCompatActivity() {
             val editor = sharedPreferences.edit()
             editor.putBoolean("temaOscuro", isChecked)
             editor.apply()
+
+            //Solo recrear si el estado realmente cambió
+            if (isChecked != temaOscuro) {
+                aplicarTema(isChecked)
+                recreate()
+            }
         }
 
         // Configurar botón de copias de seguridad
@@ -50,9 +60,6 @@ class ConfiguracionActivity : AppCompatActivity() {
         } else {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO) // Aplicar tema claro
         }
-
-        // Recrear la actividad para que se apliquen los cambios de tema
-        recreate()
     }
 
     private fun realizarCopiaDeSeguridad() {

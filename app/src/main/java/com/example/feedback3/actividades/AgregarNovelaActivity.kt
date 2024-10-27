@@ -34,6 +34,13 @@ class AgregarNovelaActivity : AppCompatActivity() {
             val anio: Int
             try {
                 anio = anioPublicacion.toInt()
+
+                // Validar que el año sea razonable
+                if (anio < 1300 || anio > 2100) {
+                    Toast.makeText(this, "Por favor, ingrese un año válido", Toast.LENGTH_SHORT).show()
+                    return@setOnClickListener
+                }
+
             } catch (e: NumberFormatException) {
                 Toast.makeText(this, "El año de publicación debe ser un número", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener

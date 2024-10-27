@@ -9,16 +9,22 @@ import com.example.feedback3.dataClasses.Usuario
 class UsuarioDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
     companion object {
         private const val DATABASE_NAME = "usuario.db"
-        private const val DATABASE_VERSION = 1
+        private const val DATABASE_VERSION = 3
     }
 
     override fun onCreate(db: SQLiteDatabase) {
-        db.execSQL("CREATE TABLE usuarios (email TEXT, password TEXT, temaOscuro INTEGER)")
+        db.execSQL("CREATE TABLE usuarios (id INTEGER PRIMARY KEY AUTOINCREMENT, email TEXT, password TEXT, temaOscuro INTEGER)")
     }
 
     override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
-        db.execSQL("DROP TABLE IF EXISTS usuarios")
-        onCreate(db)
+        if (oldVersion < 2) {
+            db.execSQL("DROP TABLE IF EXISTS usuarios")
+            onCreate(db)
+        }
+        if (oldVersion < 3) {
+            db.execSQL("DROP TABLE IF EXISTS usuarios")
+            onCreate(db)
+        }
     }
 
     //Métodos para agregar un nuevo usuario, verificar el login y obtener el tema de un usuario

@@ -9,16 +9,22 @@ import com.example.feedback3.dataClasses.Novela
 class NovelaDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
     companion object {
         private const val DATABASE_NAME = "novelas.db"
-        private const val DATABASE_VERSION = 1
+        private const val DATABASE_VERSION = 3
     }
 
     override fun onCreate(db: SQLiteDatabase) {
-        db.execSQL("CREATE TABLE novelas ( id INTEGER PRIMARY KEY AUTOINCREMENT, titulo TEXT, autor TEXT, anioPublicacion INTEGER, sinopsis TEXT, esFavorita INTEGER)")
+        db.execSQL("CREATE TABLE novelas (id INTEGER PRIMARY KEY AUTOINCREMENT, titulo TEXT, autor TEXT, anioPublicacion INTEGER, sinopsis TEXT, esFavorita INTEGER)")
     }
 
     override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
-        db.execSQL("DROP TABLE IF EXISTS novelas")
-        onCreate(db)
+        if (oldVersion < 2) {
+            db.execSQL("DROP TABLE IF EXISTS novelas")
+            onCreate(db)
+        }
+        if (oldVersion < 3) {
+            db.execSQL("DROP TABLE IF EXISTS novelas")
+            onCreate(db)
+        }
     }
 
     //Métodos para agregar, eliminar y obtener novelas
