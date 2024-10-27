@@ -4,73 +4,43 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="16dp"
-    android:background="@color/colorBackground">
+    android:background="?android:background">
 
     <EditText
-        android:id="@+id/etTitulo"
+        android:id="@+id/editTextTitulo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorBackground"
         android:hint="Título"
-        android:inputType="text"
-        android:minHeight="48dp"
-        android:padding="8dp"
-        android:textColor="@color/textColor" />
+        android:minHeight="48dp" />
 
     <EditText
-        android:id="@+id/etAutor"
+        android:id="@+id/editTextAutor"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorBackground"
+        android:layout_marginTop="8dp"
         android:hint="Autor"
-        android:inputType="text"
-        android:minHeight="48dp"
-        android:padding="8dp"
-        android:textColor="@color/textColor" />
+        android:minHeight="48dp" />
 
     <EditText
-        android:id="@+id/etAnioPublicacion"
+        android:id="@+id/editTextAnio"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorBackground"
-        android:hint="Año de publicación"
-        android:inputType="number"
-        android:minHeight="48dp"
-        android:padding="8dp"
-        android:textColor="@color/textColor" />
+        android:layout_marginTop="8dp"
+        android:hint="Año de Publicación"
+        android:minHeight="48dp" />
 
     <EditText
-        android:id="@+id/etSinopsis"
+        android:id="@+id/editTextSinopsis"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:hint="Sinopsis"
-        android:inputType="textMultiLine"
-        android:lines="3"
-        android:maxLines="5"
-        android:background="@color/colorBackground"
-    android:textColor="@color/textColor"
-    android:padding="8dp"/>
-
-    <EditText
-        android:id="@+id/etResenas"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Reseñas (opcional)"
-        android:inputType="textMultiLine"
-        android:lines="2"
-        android:maxLines="4"
-        android:background="@color/colorBackground"
-    android:textColor="@color/textColor"
-    android:padding="8dp"/>
+        android:minHeight="48dp" />
 
     <Button
-        android:id="@+id/btnSave"
-        android:layout_width="wrap_content"
+        android:id="@+id/buttonGuardar"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Guardar Novela"
-        android:layout_gravity="end"
-        android:layout_marginTop="16dp"
-        android:backgroundTint="@color/colorPrimary"
-    android:textColor="@color/textColor"/>
-
+        android:layout_marginTop="16dp"/>
 </LinearLayout>
