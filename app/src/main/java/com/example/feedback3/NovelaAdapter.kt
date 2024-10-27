@@ -15,8 +15,8 @@ class NovelaAdapter(context: Context, novelas: List<Novela>) : ArrayAdapter<Nove
 
         val view = convertView ?: LayoutInflater.from(context).inflate(R.layout.item_novela, parent, false)
 
-        val textViewTitulo = view.findViewById<TextView>(R.id.textViewTitulo)
-        val textViewAutor = view.findViewById<TextView>(R.id.textViewAutor)
+        val textViewTitulo = view.findViewById<TextView>(R.id.tvTitulo)
+        val textViewAutor = view.findViewById<TextView>(R.id.tvAutor)
 
         textViewTitulo.text = novela?.titulo
         textViewAutor.text = novela?.autor
