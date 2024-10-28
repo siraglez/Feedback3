@@ -1,5 +1,6 @@
 package com.example.feedback3.actividades
 
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
@@ -12,7 +13,15 @@ import com.example.feedback3.dataClasses.Novela
 class AgregarNovelaActivity : AppCompatActivity() {
     private lateinit var novelaDbHelper: NovelaDatabaseHelper
 
+    private lateinit var sharedPreferences: SharedPreferences
+
     override fun onCreate(savedInstanceState: Bundle?) {
+        sharedPreferences = getSharedPreferences("UsuarioPreferences", MODE_PRIVATE)
+
+        // Aplicar tema al iniciar
+        val temaOscuro = sharedPreferences.getBoolean("temaOscuro", false)
+        aplicarTema(temaOscuro)
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_agregar_novela)
 
@@ -57,6 +66,14 @@ class AgregarNovelaActivity : AppCompatActivity() {
 
             // Regresar a la actividad anterior
             finish()
+        }
+    }
+
+    private fun aplicarTema(temaOscuro: Boolean) {
+        if (temaOscuro) {
+            setTheme(R.style.Theme_Feedback3_Night)
+        } else {
+            setTheme(R.style.Theme_Feedback3_Day)
         }
     }
 }

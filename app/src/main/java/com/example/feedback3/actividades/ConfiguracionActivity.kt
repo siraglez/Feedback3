@@ -53,11 +53,16 @@ class ConfiguracionActivity : AppCompatActivity() {
     }
 
     private fun aplicarTema(temaOscuro: Boolean) {
+        // Cambiar el tema de acuerdo a la preferencia del usuario
         if (temaOscuro) {
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES) // Aplicar tema oscuro
+            setTheme(R.style.Theme_Feedback3_Night) // Aplicar tema oscuro
         } else {
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO) // Aplicar tema claro
+            setTheme(R.style.Theme_Feedback3_Day) // Aplicar tema claro
         }
+        // Aquí se puede utilizar AppCompatDelegate si se desea cambiar la configuración a nivel de aplicación
+        AppCompatDelegate.setDefaultNightMode(
+            if (temaOscuro) AppCompatDelegate.MODE_NIGHT_YES else AppCompatDelegate.MODE_NIGHT_NO
+        )
     }
 
     private fun realizarCopiaDeSeguridad() {

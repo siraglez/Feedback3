@@ -1,6 +1,7 @@
 package com.example.feedback3.actividades
 
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageButton
@@ -21,7 +22,15 @@ class MainActivity : AppCompatActivity() {
         private const val REQUEST_CODE_DETALLES = 1
     }
 
+    private lateinit var sharedPreferences: SharedPreferences
+
     override fun onCreate(savedInstanceState: Bundle?) {
+        sharedPreferences = getSharedPreferences("UsuarioPreferences", MODE_PRIVATE)
+
+        // Aplicar tema al iniciar
+        val temaOscuro = sharedPreferences.getBoolean("temaOscuro", false)
+        aplicarTema(temaOscuro)
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
@@ -85,6 +94,14 @@ class MainActivity : AppCompatActivity() {
             if (favoritoActualizado) {
                 mostrarNovelas()  // Recarga la lista de novelas
             }
+        }
+    }
+
+    private fun aplicarTema(temaOscuro: Boolean) {
+        if (temaOscuro) {
+            setTheme(R.style.Theme_Feedback3_Night)
+        } else {
+            setTheme(R.style.Theme_Feedback3_Day)
         }
     }
 

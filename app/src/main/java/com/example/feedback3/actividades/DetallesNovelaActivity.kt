@@ -1,6 +1,7 @@
 package com.example.feedback3.actividades
 
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
@@ -29,7 +30,15 @@ class DetallesNovelaActivity : AppCompatActivity() {
     private lateinit var sinopsis: String
     private var esFavorita: Boolean = false
 
+    private lateinit var sharedPreferences: SharedPreferences
+
     override fun onCreate(savedInstanceState: Bundle?) {
+        sharedPreferences = getSharedPreferences("UsuarioPreferences", MODE_PRIVATE)
+
+        // Aplicar tema al iniciar
+        val temaOscuro = sharedPreferences.getBoolean("temaOscuro", false)
+        aplicarTema(temaOscuro)
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detalles_novela)
 
@@ -112,6 +121,14 @@ class DetallesNovelaActivity : AppCompatActivity() {
             startActivity(intent)
         } else {
             Toast.makeText(this, "Error al eliminar la novela", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun aplicarTema(temaOscuro: Boolean) {
+        if (temaOscuro) {
+            setTheme(R.style.Theme_Feedback3_Night)
+        } else {
+            setTheme(R.style.Theme_Feedback3_Day)
         }
     }
 }
