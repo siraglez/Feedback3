@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorBackground"
+    android:background="?android:attr/colorBackground"
     android:orientation="vertical"
     android:padding="16dp">
 
@@ -10,7 +10,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Configuración"
-        android:textColor="@color/textColor"
+        android:textColor="?android:attr/textColor"
         android:textSize="24sp"
         android:layout_marginBottom="24dp" />
 
@@ -27,8 +27,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="Realizar Copia de Seguridad"
-        android:textColor="@color/textColor"
-        android:backgroundTint="@color/colorPrimary" />
+        android:textColor="?android:attr/textColor"
+        android:backgroundTint="?android:attr/colorPrimary" />
 
     <Button
         android:id="@+id/btnRestore"
@@ -36,15 +36,15 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="Restaurar Datos"
-        android:textColor="@color/textColor"
-        android:backgroundTint="@color/colorPrimaryDark"/>
+        android:textColor="?android:attr/textColor"
+        android:backgroundTint="?android:attr/colorPrimaryDark"/>
 
     <Button
         android:id="@+id/btnVolver"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Volver"
-        android:textColor="@color/textColor"
-        android:backgroundTint="@color/colorPrimary"
+        android:textColor="?android:attr/textColor"
+        android:backgroundTint="?android:attr/colorPrimary"
         android:layout_marginEnd="8dp"/>
 </LinearLayout>

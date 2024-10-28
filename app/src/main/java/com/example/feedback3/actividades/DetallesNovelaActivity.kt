@@ -20,9 +20,11 @@ class DetallesNovelaActivity : AppCompatActivity() {
     private lateinit var btnMarcarFavorito: Button
     private lateinit var btnVolver: Button
     private lateinit var btnEliminarNovela: Button
+    private lateinit var btnAgregarResena: Button
 
     private lateinit var usuarioDbHelper: UsuarioDatabaseHelper
     private lateinit var novelaDbHelper: NovelaDatabaseHelper
+    private lateinit var sharedPreferences: SharedPreferences
 
     private lateinit var titulo: String
     private lateinit var autor: String
@@ -31,9 +33,8 @@ class DetallesNovelaActivity : AppCompatActivity() {
     private var esFavorita: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        val sharedPreferences: SharedPreferences = getSharedPreferences("UsuarioPreferences", MODE_PRIVATE)
-        val temaOscuro = sharedPreferences.getBoolean("temaOscuro", false)
-        setTheme(if (temaOscuro) R.style.Theme_Feedback3_Night else R.style.Theme_Feedback3_Day)
+        sharedPreferences = getSharedPreferences("UsuarioPreferences", MODE_PRIVATE)
+        aplicarTema()
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detalles_novela)
@@ -49,6 +50,7 @@ class DetallesNovelaActivity : AppCompatActivity() {
         btnMarcarFavorito = findViewById(R.id.btnMarcarFavorito)
         btnVolver = findViewById(R.id.btnVolver)
         btnEliminarNovela = findViewById(R.id.btnEliminarNovela)
+        btnAgregarResena = findViewById(R.id.btnAgregarResena)
 
         // Obtener los datos pasados desde el Intent
         titulo = intent.getStringExtra("titulo") ?: ""
@@ -84,6 +86,13 @@ class DetallesNovelaActivity : AppCompatActivity() {
         btnEliminarNovela.setOnClickListener {
             eliminarNovela()
         }
+
+        //Configurar el botón para agregar reseñas
+        btnAgregarResena.setOnClickListener {
+            val intent = Intent(this, AgregarResenaActivity::class.java)
+            intent.putExtra("tituloNovela", titulo)
+            startActivity(intent)
+        }
     }
 
     private fun mostrarDetallesNovela() {
@@ -118,5 +127,10 @@ class DetallesNovelaActivity : AppCompatActivity() {
         } else {
             Toast.makeText(this, "Error al eliminar la novela", Toast.LENGTH_SHORT).show()
         }
+    }
+
+    private fun aplicarTema() {
+        val temaOscuro = sharedPreferences.getBoolean("temaOscuro", false)
+        setTheme(if (temaOscuro) R.style.Theme_Feedback3_Night else R.style.Theme_Feedback3_Day)
     }
 }

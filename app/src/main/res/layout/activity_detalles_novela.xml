@@ -2,7 +2,7 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorBackground">
+    android:background="?android:attr/colorBackground">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -15,7 +15,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="24sp"
-            android:textColor="@color/textColor"
+            android:textColor="?android:attr/textColor"
             android:layout_marginBottom="8dp"/>
 
         <TextView
@@ -23,28 +23,28 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="18sp"
-            android:textColor="@color/textColor"
+            android:textColor="?android:attr/textColor"
             android:layout_marginBottom="8dp"/>
 
         <TextView
             android:id="@+id/tvAnio"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/textColor"
+            android:textColor="?android:attr/textColor"
             android:layout_marginBottom="8dp"/>
 
         <TextView
             android:id="@+id/tvSinopsis"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/textColor"
+            android:textColor="?android:attr/textColor"
             android:layout_marginBottom="8dp"/>
 
         <TextView
             android:id="@+id/tvResenas"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/textColor"
+            android:textColor="?android:attr/textColor"
             android:layout_marginBottom="8dp"/>
 
         <Button
@@ -52,11 +52,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Marcar como Favorita"
-            android:textColor="@color/textColor"
-            android:backgroundTint="@color/colorPrimary"
+            android:textColor="?android:attr/textColor"
+            android:backgroundTint="?android:attr/colorPrimary"
             android:layout_marginTop="16dp"/>
 
-        <!-- Nueva fila para los botones de Volver y Eliminar -->
+        <!-- Nueva fila para los botones de Volver, Eliminar y Agregar reseña -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -69,8 +69,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Volver"
-                android:textColor="@color/textColor"
-                android:backgroundTint="@color/colorPrimaryDark"
+                android:textColor="?android:attr/textColor"
+                android:backgroundTint="?android:attr/colorPrimaryDark"
                 android:layout_marginEnd="8dp"/>
 
             <Button
@@ -78,8 +78,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Eliminar Novela"
-                android:textColor="@color/textColor"
-                android:backgroundTint="@color/colorPrimaryDark"/>
+                android:textColor="?android:attr/textColor"
+                android:backgroundTint="?android:attr/colorPrimaryDark"/>
+
+            <Button
+                android:id="@+id/btnAgregarResena"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Agregar Reseña"
+                android:textColor="?android:attr/textColor"
+                android:backgroundTint="?android:attr/colorPrimaryDark" />
+
         </LinearLayout>
 
     </LinearLayout>

@@ -92,4 +92,15 @@ class NovelaDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABAS
         db.close()
         return rowsUpdated > 0
     }
+
+    fun agregarResena(titulo: String, resena: String): Boolean {
+        val db = writableDatabase
+        val contentValues = ContentValues().apply {
+            put("titulo", titulo)
+            put("resena", resena)
+        }
+        val result = db.insert("resenas", null, contentValues)
+        db.close()
+        return result != -1L
+    }
 }

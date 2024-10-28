@@ -17,15 +17,15 @@ class MainActivity : AppCompatActivity() {
     private lateinit var novelaDbHelper: NovelaDatabaseHelper
     private lateinit var adapter: NovelaAdapter
     private lateinit var listViewNovelas: ListView
+    private lateinit var sharedPreferences: SharedPreferences
 
     companion object {
         private const val REQUEST_CODE_DETALLES = 1
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        val sharedPreferences: SharedPreferences = getSharedPreferences("UsuarioPreferences", MODE_PRIVATE)
-        val temaOscuro = sharedPreferences.getBoolean("temaOscuro", false)
-        setTheme(if (temaOscuro) R.style.Theme_Feedback3_Night else R.style.Theme_Feedback3_Day)
+        sharedPreferences = getSharedPreferences("UsuarioPreferences", MODE_PRIVATE)
+        aplicarTema()
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -91,6 +91,11 @@ class MainActivity : AppCompatActivity() {
                 mostrarNovelas()  // Recarga la lista de novelas
             }
         }
+    }
+
+    private fun aplicarTema() {
+        val temaOscuro = sharedPreferences.getBoolean("temaOscuro", false)
+        setTheme(if (temaOscuro) R.style.Theme_Feedback3_Night else R.style.Theme_Feedback3_Day)
     }
 
     override fun onResume() {

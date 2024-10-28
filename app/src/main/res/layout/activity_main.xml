@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="16dp"
-    android:background="@color/colorBackground">
+    android:background="?android:attr/colorBackground">
 
     <TextView
         android:layout_width="wrap_content"
@@ -14,7 +14,7 @@
         android:textSize="20sp"
         android:textStyle="bold"
         android:paddingBottom="8dp"
-        android:textColor="@color/textColor" />
+        android:textColor="?android:attr/textColor" />
 
     <ListView
         android:id="@+id/listViewNovelas"
@@ -29,8 +29,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Agregar Novela"
-        android:backgroundTint="@color/colorPrimaryDark"
-        android:textColor="@color/textColor" />
+        android:backgroundTint="?android:attr/colorPrimaryDark"
+        android:textColor="?android:attr/textColor" />
 
     <LinearLayout
         android:layout_width="match_parent"

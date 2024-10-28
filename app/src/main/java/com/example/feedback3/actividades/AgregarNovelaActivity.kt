@@ -12,11 +12,11 @@ import com.example.feedback3.dataClasses.Novela
 
 class AgregarNovelaActivity : AppCompatActivity() {
     private lateinit var novelaDbHelper: NovelaDatabaseHelper
+    private lateinit var sharedPreferences: SharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        val sharedPreferences: SharedPreferences = getSharedPreferences("UsuarioPreferences", MODE_PRIVATE)
-        val temaOscuro = sharedPreferences.getBoolean("temaOscuro", false)
-        setTheme(if (temaOscuro) R.style.Theme_Feedback3_Night else R.style.Theme_Feedback3_Day)
+        sharedPreferences = getSharedPreferences("UsuarioPreferences", MODE_PRIVATE)
+        aplicarTema()
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_agregar_novela)
@@ -63,5 +63,10 @@ class AgregarNovelaActivity : AppCompatActivity() {
             // Regresar a la actividad anterior
             finish()
         }
+    }
+
+    private fun aplicarTema() {
+        val temaOscuro = sharedPreferences.getBoolean("temaOscuro", false)
+        setTheme(if (temaOscuro) R.style.Theme_Feedback3_Night else R.style.Theme_Feedback3_Day)
     }
 }
