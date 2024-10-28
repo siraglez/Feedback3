@@ -10,46 +10,65 @@ class NovelaDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABAS
     companion object {
         private const val DATABASE_NAME = "novelas.db"
         private const val DATABASE_VERSION = 3
+        private const val TABLE_NOVELAS = "novelas"
+        private const val COLUMN_TITULO = "titulo"
     }
 
     override fun onCreate(db: SQLiteDatabase) {
-        db.execSQL("CREATE TABLE novelas (id INTEGER PRIMARY KEY AUTOINCREMENT, titulo TEXT, autor TEXT, anioPublicacion INTEGER, sinopsis TEXT, esFavorita INTEGER)")
+        db.execSQL(
+            "CREATE TABLE $TABLE_NOVELAS (" +
+                    "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                    "$COLUMN_TITULO TEXT, " +
+                    "autor TEXT, " +
+                    "anioPublicacion INTEGER, " +
+                    "sinopsis TEXT, " +
+                    "esFavorita INTEGER)"
+        )
     }
 
     override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
         if (oldVersion < 2) {
-            db.execSQL("DROP TABLE IF EXISTS novelas")
+            db.execSQL("DROP TABLE IF EXISTS $TABLE_NOVELAS")
             onCreate(db)
         }
         if (oldVersion < 3) {
-            db.execSQL("DROP TABLE IF EXISTS novelas")
+            db.execSQL("DROP TABLE IF EXISTS $TABLE_NOVELAS")
             onCreate(db)
         }
     }
 
-    //Métodos para agregar, eliminar y obtener novelas
+    // Agregar una novela
     fun agregarNovela(novela: Novela) {
         val db = writableDatabase
         val values = ContentValues().apply {
-            put("titulo", novela.titulo)
+            put(COLUMN_TITULO, novela.titulo)
             put("autor", novela.autor)
             put("anioPublicacion", novela.anioPublicacion)
             put("sinopsis", novela.sinopsis)
             put("esFavorita", if (novela.esFavorita) 1 else 0)
         }
-        db.insert("novelas", null, values)
+        db.insert(TABLE_NOVELAS, null, values)
         db.close()
     }
 
+    // Eliminar una novela por su título
+    fun eliminarNovela(titulo: String): Boolean {
+        val db = writableDatabase
+        val rowsDeleted = db.delete(TABLE_NOVELAS, "$COLUMN_TITULO = ?", arrayOf(titulo))
+        db.close()
+        return rowsDeleted > 0
+    }
+
+    // Obtener la lista de novelas
     fun obtenerNovelas(): List<Novela> {
         val novelas = mutableListOf<Novela>()
         val db = readableDatabase
-        val cursor = db.rawQuery("SELECT * FROM novelas", null)
+        val cursor = db.rawQuery("SELECT * FROM $TABLE_NOVELAS", null)
 
         if (cursor.moveToFirst()) {
             do {
                 val novela = Novela(
-                    cursor.getString(cursor.getColumnIndexOrThrow("titulo")),
+                    cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_TITULO)),
                     cursor.getString(cursor.getColumnIndexOrThrow("autor")),
                     cursor.getInt(cursor.getColumnIndexOrThrow("anioPublicacion")),
                     cursor.getString(cursor.getColumnIndexOrThrow("sinopsis")),
@@ -63,9 +82,14 @@ class NovelaDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABAS
         return novelas
     }
 
-    fun eliminarNovela(titulo: String) {
+    //Actualizar el estado de favorito de las novelas
+    fun actualizarFavorito(titulo: String, esFavorita: Boolean): Boolean {
         val db = writableDatabase
-        db.delete("novelas", "titulo = ?", arrayOf(titulo))
+        val values = ContentValues().apply {
+            put("esFavorita", if (esFavorita) 1 else 0)
+        }
+        val rowsUpdated = db.update("novelas", values, "titulo = ?", arrayOf(titulo))
         db.close()
+        return rowsUpdated > 0
     }
 }

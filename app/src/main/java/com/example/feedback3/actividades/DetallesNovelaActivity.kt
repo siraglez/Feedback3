@@ -5,8 +5,11 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.feedback3.R
+import com.example.feedback3.baseDeDatos.UsuarioDatabaseHelper
+import com.example.feedback3.baseDeDatos.NovelaDatabaseHelper
 
 class DetallesNovelaActivity : AppCompatActivity() {
     private lateinit var textViewTitulo: TextView
@@ -14,7 +17,11 @@ class DetallesNovelaActivity : AppCompatActivity() {
     private lateinit var textViewAnio: TextView
     private lateinit var textViewSinopsis: TextView
     private lateinit var btnMarcarFavorito: Button
-    private lateinit var btnVolver: Button // Cambiado de ImageButton a Button
+    private lateinit var btnVolver: Button
+    private lateinit var btnEliminarNovela: Button
+
+    private lateinit var usuarioDbHelper: UsuarioDatabaseHelper
+    private lateinit var novelaDbHelper: NovelaDatabaseHelper
 
     private lateinit var titulo: String
     private lateinit var autor: String
@@ -26,13 +33,17 @@ class DetallesNovelaActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detalles_novela)
 
-        // Inicializar los TextViews y el botón
+        usuarioDbHelper = UsuarioDatabaseHelper(this)
+        novelaDbHelper = NovelaDatabaseHelper(this)
+
+        // Inicializar los TextViews y los botones
         textViewTitulo = findViewById(R.id.tvTitulo)
         textViewAutor = findViewById(R.id.tvAutor)
         textViewAnio = findViewById(R.id.tvAnio)
         textViewSinopsis = findViewById(R.id.tvSinopsis)
         btnMarcarFavorito = findViewById(R.id.btnMarcarFavorito)
-        btnVolver = findViewById(R.id.btnVolver) // Aquí sigue siendo Button
+        btnVolver = findViewById(R.id.btnVolver)
+        btnEliminarNovela = findViewById(R.id.btnEliminarNovela)
 
         // Obtener los datos pasados desde el Intent
         titulo = intent.getStringExtra("titulo") ?: ""
@@ -49,15 +60,24 @@ class DetallesNovelaActivity : AppCompatActivity() {
 
         // Configurar el botón para marcar como favorito
         btnMarcarFavorito.setOnClickListener {
-            // Lógica para marcar o desmarcar como favorito
             esFavorita = !esFavorita // Cambia el estado
             actualizarEstadoFavorito()
+
+            // Envía el resultado de la actualización a MainActivity
+            val resultIntent = Intent().apply {
+                putExtra("favorito_actualizado", true)
+            }
+            setResult(RESULT_OK, resultIntent)
         }
 
         // Configurar el botón para volver a la pantalla anterior
         btnVolver.setOnClickListener {
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
+            finish()  // Simplemente termina la actividad para volver a MainActivity
+        }
+
+        // Configurar el botón para eliminar la novela
+        btnEliminarNovela.setOnClickListener {
+            eliminarNovela()
         }
     }
 
@@ -70,10 +90,28 @@ class DetallesNovelaActivity : AppCompatActivity() {
     }
 
     private fun actualizarEstadoFavorito() {
+        // Actualiza el botón para reflejar el estado de favorito
         btnMarcarFavorito.text = if (esFavorita) {
             "Desmarcar Favorito"
         } else {
             "Marcar como Favorito"
+        }
+
+        // Guarda el cambio en la base de datos
+        val actualizado = novelaDbHelper.actualizarFavorito(titulo, esFavorita)
+        if (!actualizado) {
+            Toast.makeText(this, "Error al actualizar favorito", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun eliminarNovela() {
+        val eliminado = novelaDbHelper.eliminarNovela(titulo)
+        if (eliminado) {
+            Toast.makeText(this, "Novela eliminada", Toast.LENGTH_SHORT).show()
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+        } else {
+            Toast.makeText(this, "Error al eliminar la novela", Toast.LENGTH_SHORT).show()
         }
     }
 }

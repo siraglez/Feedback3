@@ -6,7 +6,6 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="android:background">@color/colorBackground</item>
         <item name="android:textColor">@color/textColor</item>
-        <item name="android:colorAccent">@color/colorFavorito</item>
     </style>
 
     <style name="Theme.Feedback3.Night" parent="Theme.Night" >
@@ -14,6 +13,5 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDarkNight</item>
         <item name="android:background">@color/colorBackgroundNight</item>
         <item name="android:textColor">@color/textColorNight</item>
-        <item name="android:colorAccent">@color/colorFavoritoNight</item>
     </style>
 </resources>

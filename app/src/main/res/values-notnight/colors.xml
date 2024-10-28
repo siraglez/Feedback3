@@ -5,13 +5,11 @@
     <color name="colorPrimaryDark" tools:ignore="MissingDefaultResource">#E6E6FA</color> <!-- Morado claro -->
     <color name="colorBackground" tools:ignore="MissingDefaultResource">#FFFFFF</color> <!-- Blanco -->
     <color name="textColor" tools:ignore="MissingDefaultResource">#000000</color> <!-- Negro -->
-    <color name="colorFavorito" tools:ignore="MissingDefaultResource">#FFFF00</color> <!-- Amarillo -->
 
     <!-- Colores para modo noche (oscuro) -->
     <color name="colorPrimaryNight" tools:ignore="MissingDefaultResource">#00008B</color> <!-- Azul oscuro -->
     <color name="colorPrimaryDarkNight" tools:ignore="MissingDefaultResource">#4B0082</color> <!-- Morado oscuro -->
     <color name="colorBackgroundNight" tools:ignore="MissingDefaultResource">#2E2E2E</color> <!-- Gris oscuro -->
     <color name="textColorNight" tools:ignore="MissingDefaultResource">#FFFFFF</color> <!-- Blanco -->
-    <color name="colorFavoritoNight" tools:ignore="MissingDefaultResource">#FFFF10</color> <!-- Amarillo -->
 </resources>
 

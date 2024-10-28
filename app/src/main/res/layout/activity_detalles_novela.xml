@@ -56,13 +56,31 @@
             android:backgroundTint="@color/colorPrimary"
             android:layout_marginTop="16dp"/>
 
-        <Button
-            android:id="@+id/btnVolver"
-            android:layout_width="wrap_content"
+        <!-- Nueva fila para los botones de Volver y Eliminar -->
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Volver"
-            android:textColor="@color/textColor"
-            android:backgroundTint="@color/colorPrimaryDark"
-            android:layout_marginTop="8dp"/>
+            android:orientation="horizontal"
+            android:layout_marginTop="8dp"
+            android:gravity="end">
+
+            <Button
+                android:id="@+id/btnVolver"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Volver"
+                android:textColor="@color/textColor"
+                android:backgroundTint="@color/colorPrimaryDark"
+                android:layout_marginEnd="8dp"/>
+
+            <Button
+                android:id="@+id/btnEliminarNovela"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Eliminar Novela"
+                android:textColor="@color/textColor"
+                android:backgroundTint="@color/colorPrimaryDark"/>
+        </LinearLayout>
+
     </LinearLayout>
 </ScrollView>

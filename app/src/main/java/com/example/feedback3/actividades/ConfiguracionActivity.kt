@@ -18,15 +18,14 @@ class ConfiguracionActivity : AppCompatActivity() {
     private lateinit var sharedPreferences: SharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        // Inicializa sharedPreferences antes de usarla
+        // Inicializar sharedPreferences antes de usarla
         sharedPreferences = getSharedPreferences("UsuarioPreferences", MODE_PRIVATE)
 
-        // Ahora puedes acceder a sharedPreferences para obtener el valor de temaOscuro
+        // Acceder a sharedPreferences para obtener el valor de temaOscuro
         val temaOscuro = sharedPreferences.getBoolean("temaOscuro", false)
-        aplicarTema(temaOscuro)
+        aplicarTema(temaOscuro)  // Aplicar el tema antes de llamar a super.onCreate()
 
+        super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_configuracion)
 
         usuarioDbHelper = UsuarioDatabaseHelper(this)
@@ -37,15 +36,14 @@ class ConfiguracionActivity : AppCompatActivity() {
         switchTemaNoche.isChecked = temaOscuro
 
         switchTemaNoche.setOnCheckedChangeListener { _, isChecked ->
+            // Actualiza el valor del tema oscuro en SharedPreferences
             val editor = sharedPreferences.edit()
             editor.putBoolean("temaOscuro", isChecked)
             editor.apply()
 
-            //Solo recrear si el estado realmente cambió
-            if (isChecked != temaOscuro) {
-                aplicarTema(isChecked)
-                recreate()
-            }
+            // Aplica el tema y recrea la actividad
+            aplicarTema(isChecked)
+            recreate()  // Recrear para aplicar el nuevo tema
         }
 
         // Configurar botón de copias de seguridad

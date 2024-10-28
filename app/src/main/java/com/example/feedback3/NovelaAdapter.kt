@@ -2,6 +2,9 @@ package com.example.feedback3.adaptadores
 
 import android.content.Intent
 import android.content.Context
+import android.graphics.Color
+import android.text.SpannableString
+import android.text.style.UnderlineSpan
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -23,27 +26,29 @@ class NovelaAdapter(
         val tvTitulo = view.findViewById<TextView>(R.id.tvTitulo)
         val tvAutor = view.findViewById<TextView>(R.id.tvAutor)
 
-        tvTitulo.text = novela?.titulo
-        tvAutor.text = novela?.autor
-
-        // Cambiar el color de fondo o agregar un ícono si es favorita
+        // Configura el título con subrayado y color amarillo si es favorita
         if (novela?.esFavorita == true) {
-            // Por ejemplo, color de fondo amarillo para las novelas favoritas
-            view.setBackgroundColor(context.getColor(R.color.colorFavorito)) // Debes definir este color en colors.xml
+            val spannableTitle = SpannableString(novela.titulo).apply {
+                setSpan(UnderlineSpan(), 0, novela.titulo.length, 0)
+            }
+            tvTitulo.text = spannableTitle
+            tvTitulo.setTextColor(Color.MAGENTA)  // Color magenta para el título de novelas favoritas
         } else {
-            // Color de fondo por defecto
-            view.setBackgroundColor(context.getColor(android.R.color.transparent))
+            tvTitulo.text = novela?.titulo
+            tvTitulo.setTextColor(Color.BLACK)  // Color predeterminado para novelas no favoritas
         }
+
+        tvAutor.text = novela?.autor
 
         view.setOnClickListener {
             // Al hacer click en la novela, abre la actividad de detalles
-            val intent = Intent(context, DetallesNovelaActivity::class.java)
-            intent.putExtra("titulo", novela?.titulo)
-            intent.putExtra("autor", novela?.autor)
-            intent.putExtra("anio", novela?.anioPublicacion)
-            intent.putExtra("sinopsis", novela?.sinopsis)
-            intent.putExtra("esFavorita", novela?.esFavorita)
-
+            val intent = Intent(context, DetallesNovelaActivity::class.java).apply {
+                putExtra("titulo", novela?.titulo)
+                putExtra("autor", novela?.autor)
+                putExtra("anio", novela?.anioPublicacion)
+                putExtra("sinopsis", novela?.sinopsis)
+                putExtra("esFavorita", novela?.esFavorita)
+            }
             context.startActivity(intent)
         }
         return view
