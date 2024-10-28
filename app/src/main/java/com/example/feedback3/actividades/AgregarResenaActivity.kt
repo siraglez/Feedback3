@@ -1,6 +1,5 @@
 package com.example.feedback3.actividades
 
-import android.annotation.SuppressLint
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.widget.Button
@@ -21,7 +20,6 @@ class AgregarResenaActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         sharedPreferences = getSharedPreferences("UsuarioPreferences", MODE_PRIVATE)
         aplicarTema()
-        recreate()
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_agregar_resena)
