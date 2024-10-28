@@ -35,6 +35,7 @@ class DetallesNovelaActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         sharedPreferences = getSharedPreferences("UsuarioPreferences", MODE_PRIVATE)
         aplicarTema()
+        recreate()
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detalles_novela)

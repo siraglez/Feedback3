@@ -1,5 +1,6 @@
 package com.example.feedback3.actividades
 
+import android.annotation.SuppressLint
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.widget.Button
@@ -12,6 +13,7 @@ import com.example.feedback3.baseDeDatos.NovelaDatabaseHelper
 class AgregarResenaActivity : AppCompatActivity() {
     private lateinit var editTextResena: EditText
     private lateinit var btnGuardarResena: Button
+    private lateinit var btnVolver: Button
     private lateinit var novelaDbHelper: NovelaDatabaseHelper
     private lateinit var sharedPreferences: SharedPreferences
     private lateinit var tituloNovela: String
@@ -19,6 +21,7 @@ class AgregarResenaActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         sharedPreferences = getSharedPreferences("UsuarioPreferences", MODE_PRIVATE)
         aplicarTema()
+        recreate()
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_agregar_resena)
@@ -26,6 +29,7 @@ class AgregarResenaActivity : AppCompatActivity() {
         // Inicializar los elementos y obtener el título de la novela
         editTextResena = findViewById(R.id.editTextResena)
         btnGuardarResena = findViewById(R.id.btnGuardarResena)
+        btnVolver = findViewById(R.id.btnVolver)
         novelaDbHelper = NovelaDatabaseHelper(this)
         tituloNovela = intent.getStringExtra("tituloNovela") ?: ""
 
@@ -43,6 +47,11 @@ class AgregarResenaActivity : AppCompatActivity() {
             } else {
                 Toast.makeText(this, "Escribe una reseña", Toast.LENGTH_SHORT).show()
             }
+        }
+
+        // Configurar el botón para volver a la pantalla anterior
+        btnVolver.setOnClickListener {
+            finish()  // Simplemente termina la actividad para volver a MainActivity
         }
     }
 

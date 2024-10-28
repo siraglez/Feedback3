@@ -1,8 +1,6 @@
-package com.example.feedback3.adaptadores
 
 import android.content.Intent
 import android.content.Context
-import android.content.SharedPreferences
 import android.graphics.Color
 import android.text.SpannableString
 import android.text.style.UnderlineSpan
@@ -20,9 +18,6 @@ class NovelaAdapter(
     private val novelas: List<Novela>
 ) : ArrayAdapter<Novela>(context, 0, novelas) {
 
-    private val sharedPreferences: SharedPreferences = context.getSharedPreferences("UsuarioPreferences", Context.MODE_PRIVATE)
-    private val isNightMode: Boolean = sharedPreferences.getBoolean("temaOscuro", false)
-
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
         val novela = getItem(position)
         val view = convertView ?: LayoutInflater.from(context).inflate(R.layout.item_novela, parent, false)
@@ -30,7 +25,7 @@ class NovelaAdapter(
         val tvTitulo = view.findViewById<TextView>(R.id.tvTitulo)
         val tvAutor = view.findViewById<TextView>(R.id.tvAutor)
 
-        // Cambia el color del título de acuerdo a si es favorita y al modo noche
+        // Configura el título con subrayado y color amarillo si es favorita
         if (novela?.esFavorita == true) {
             val spannableTitle = SpannableString(novela.titulo).apply {
                 setSpan(UnderlineSpan(), 0, novela.titulo.length, 0)
@@ -39,8 +34,7 @@ class NovelaAdapter(
             tvTitulo.setTextColor(Color.MAGENTA)  // Color magenta para el título de novelas favoritas
         } else {
             tvTitulo.text = novela?.titulo
-            // Aplica blanco si está en modo oscuro, de lo contrario negro
-            tvTitulo.setTextColor(if (isNightMode) Color.WHITE else Color.BLACK)
+            tvTitulo.setTextColor(Color.BLACK)  // Color predeterminado para novelas no favoritas
         }
 
         tvAutor.text = novela?.autor

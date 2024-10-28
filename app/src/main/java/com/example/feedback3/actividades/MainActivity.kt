@@ -1,20 +1,16 @@
 package com.example.feedback3.actividades
 
-import android.annotation.SuppressLint
+import NovelaAdapter
 import android.content.Intent
 import android.content.SharedPreferences
-import android.graphics.Color
 import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.ListView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
-import androidx.core.widget.ImageViewCompat
 import com.example.feedback3.R
 import com.example.feedback3.baseDeDatos.NovelaDatabaseHelper
-import com.example.feedback3.adaptadores.NovelaAdapter
 import com.example.feedback3.dataClasses.Novela
 
 class MainActivity : AppCompatActivity() {
@@ -27,10 +23,10 @@ class MainActivity : AppCompatActivity() {
         private const val REQUEST_CODE_DETALLES = 1
     }
 
-    @SuppressLint("ResourceType")
     override fun onCreate(savedInstanceState: Bundle?) {
         sharedPreferences = getSharedPreferences("UsuarioPreferences", MODE_PRIVATE)
         aplicarTema()
+        recreate()
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -40,19 +36,6 @@ class MainActivity : AppCompatActivity() {
 
         adapter = NovelaAdapter(this, mutableListOf())
         listViewNovelas.adapter = adapter
-
-        val btnConfiguracion = findViewById<ImageButton>(R.id.btnConfiguracion)
-        val btnLogout = findViewById<ImageButton>(R.id.btnLogout)
-
-        // Configura el color de los iconos según el tema oscuro
-        val isNightMode = sharedPreferences.getBoolean("modoNoche", false)
-        val iconColor = if (isNightMode) {
-            ContextCompat.getColor(this, R.color.textColorNight)
-        } else {
-            ContextCompat.getColor(this, R.color.textColor)
-        }
-        ImageViewCompat.setImageTintList(btnConfiguracion, ContextCompat.getColorStateList(this, iconColor))
-        ImageViewCompat.setImageTintList(btnLogout, ContextCompat.getColorStateList(this, iconColor))
 
         // Configura el clic en el elemento de la lista para ver detalles
         listViewNovelas.setOnItemClickListener { _, _, position, _ ->
@@ -76,13 +59,13 @@ class MainActivity : AppCompatActivity() {
         }
 
         //Botón para ir a la pantalla de configuración
-        btnConfiguracion.setOnClickListener {
+        findViewById<ImageButton>(R.id.btnConfiguracion).setOnClickListener {
             val intent = Intent(this, ConfiguracionActivity::class.java)
             startActivity(intent)
         }
 
         //Botón para cerrar sesión
-        btnLogout.setOnClickListener {
+        findViewById<ImageButton>(R.id.btnLogout).setOnClickListener {
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
             finish()
@@ -112,7 +95,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun aplicarTema() {
-        val temaOscuro = sharedPreferences.getBoolean("modoNoche", false)
+        val temaOscuro = sharedPreferences.getBoolean("temaOscuro", false)
         setTheme(if (temaOscuro) R.style.Theme_Feedback3_Night else R.style.Theme_Feedback3_Day)
     }
 

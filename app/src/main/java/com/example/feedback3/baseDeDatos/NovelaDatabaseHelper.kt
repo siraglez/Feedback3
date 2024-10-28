@@ -11,7 +11,9 @@ class NovelaDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABAS
         private const val DATABASE_NAME = "novelas.db"
         private const val DATABASE_VERSION = 3
         private const val TABLE_NOVELAS = "novelas"
+        private const val TABLE_RESENAS = "resenas"
         private const val COLUMN_TITULO = "titulo"
+        private const val COLUMN_RESENA = "resena"
     }
 
     override fun onCreate(db: SQLiteDatabase) {
@@ -22,17 +24,22 @@ class NovelaDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABAS
                     "autor TEXT, " +
                     "anioPublicacion INTEGER, " +
                     "sinopsis TEXT, " +
+                    "$COLUMN_RESENA TEXT, " +
                     "esFavorita INTEGER)"
+        )
+
+        db.execSQL(
+            "CREATE TABLE $TABLE_RESENAS (" +
+            "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+            "$COLUMN_TITULO TEXT, " +
+            "$COLUMN_RESENA TEXT)"
         )
     }
 
     override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
-        if (oldVersion < 2) {
-            db.execSQL("DROP TABLE IF EXISTS $TABLE_NOVELAS")
-            onCreate(db)
-        }
         if (oldVersion < 3) {
             db.execSQL("DROP TABLE IF EXISTS $TABLE_NOVELAS")
+            db.execSQL("DROP TABLE IF EXISTS $TABLE_RESENAS")
             onCreate(db)
         }
     }
