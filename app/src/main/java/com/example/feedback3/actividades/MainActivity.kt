@@ -24,12 +24,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        sharedPreferences = getSharedPreferences("UsuarioPreferences", MODE_PRIVATE)
-        aplicarTema()
-        recreate()
-
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        sharedPreferences = getSharedPreferences("UsuarioPreferences", MODE_PRIVATE)
 
         novelaDbHelper = NovelaDatabaseHelper(this)
         listViewNovelas = findViewById(R.id.listViewNovelas)
@@ -101,6 +99,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
+        aplicarTema()
         mostrarNovelas()
     }
 }

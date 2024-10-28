@@ -15,12 +15,10 @@ class AgregarNovelaActivity : AppCompatActivity() {
     private lateinit var sharedPreferences: SharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        sharedPreferences = getSharedPreferences("UsuarioPreferences", MODE_PRIVATE)
-        aplicarTema()
-        recreate()
-
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_agregar_novela)
+
+        sharedPreferences = getSharedPreferences("UsuarioPreferences", MODE_PRIVATE)
 
         novelaDbHelper = NovelaDatabaseHelper(this)
 
@@ -69,5 +67,10 @@ class AgregarNovelaActivity : AppCompatActivity() {
     private fun aplicarTema() {
         val temaOscuro = sharedPreferences.getBoolean("temaOscuro", false)
         setTheme(if (temaOscuro) R.style.Theme_Feedback3_Night else R.style.Theme_Feedback3_Day)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        aplicarTema()
     }
 }

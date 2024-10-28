@@ -3,6 +3,7 @@ package com.example.feedback3.actividades
 import android.annotation.SuppressLint
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
@@ -19,12 +20,10 @@ class AgregarResenaActivity : AppCompatActivity() {
     private lateinit var tituloNovela: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        sharedPreferences = getSharedPreferences("UsuarioPreferences", MODE_PRIVATE)
-        aplicarTema()
-        recreate()
-
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_agregar_resena)
+
+        sharedPreferences = getSharedPreferences("UsuarioPreferences", MODE_PRIVATE)
 
         // Inicializar los elementos y obtener el título de la novela
         editTextResena = findViewById(R.id.editTextResena)
@@ -36,6 +35,9 @@ class AgregarResenaActivity : AppCompatActivity() {
         // Configurar el botón para guardar la reseña
         btnGuardarResena.setOnClickListener {
             val resena = editTextResena.text.toString()
+            //Log para depurar
+            Log.d("AgregarResena", "Título: $tituloNovela, Reseña: $resena")
+
             if (resena.isNotEmpty()) {
                 val exito = novelaDbHelper.agregarResena(tituloNovela, resena)
                 if (exito) {
@@ -58,5 +60,10 @@ class AgregarResenaActivity : AppCompatActivity() {
     private fun aplicarTema() {
         val temaOscuro = sharedPreferences.getBoolean("temaOscuro", false)
         setTheme(if (temaOscuro) R.style.Theme_Feedback3_Night else R.style.Theme_Feedback3_Day)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        aplicarTema()
     }
 }
