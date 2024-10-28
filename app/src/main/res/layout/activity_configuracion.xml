@@ -31,4 +31,13 @@
         android:text="Restaurar Datos"
         android:textColor="@color/textColor"
         android:backgroundTint="@color/colorPrimaryDark"/>
+
+    <Button
+        android:id="@+id/btnVolver"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Volver"
+        android:textColor="@color/textColor"
+        android:backgroundTint="@color/colorPrimary"
+        android:layout_marginEnd="8dp"/>
 </LinearLayout>

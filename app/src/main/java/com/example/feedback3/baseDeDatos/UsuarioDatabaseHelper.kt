@@ -68,6 +68,23 @@ class UsuarioDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABA
         return usuarios
     }
 
+    fun agregarUsuarioSiNoExiste(usuario: Usuario) {
+        val db = writableDatabase
+        val cursor = db.rawQuery("SELECT * FROM usuarios WHERE email = ?", arrayOf(usuario.email))
+
+        if (!cursor.moveToFirst()) {  // Si no existe el usuario
+            val values = ContentValues().apply {
+                put("email", usuario.email)
+                put("password", usuario.password)
+                put("temaOscuro", if (usuario.temaOscuro) 1 else 0)
+            }
+            db.insert("usuarios", null, values)
+        }
+
+        cursor.close()
+        db.close()
+    }
+
     fun obtenerTemaUsuario(email: String): Boolean {
         val db = readableDatabase
         val cursor = db.rawQuery("SELECT temaOscuro FROM usuarios WHERE email = ?", arrayOf(email))
