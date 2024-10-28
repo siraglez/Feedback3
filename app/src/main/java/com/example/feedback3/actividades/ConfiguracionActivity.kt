@@ -3,6 +3,7 @@ package com.example.feedback3.actividades
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.widget.Button
+import android.widget.Switch
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.feedback3.R
@@ -19,14 +20,30 @@ class ConfiguracionActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         sharedPreferences = getSharedPreferences("UsuarioPreferences", MODE_PRIVATE)
 
+        //Aplicar el tema al iniciar la actividad
+        aplicarTema()
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_configuracion)
 
         usuarioDbHelper = UsuarioDatabaseHelper(this)
 
+        val switchTemaOscuro = findViewById<Switch>(R.id.switchTemaOscuro)
         val btnBackup = findViewById<Button>(R.id.btnBackup)
         val btnRestore = findViewById<Button>(R.id.btnRestore)
         val btnVolver = findViewById<Button>(R.id.btnVolver)
+
+        //Configurar el switch con la preferencia guardada
+        val temaOscuroActivado = sharedPreferences.getBoolean("temaOscuro", false)
+        switchTemaOscuro.isChecked = temaOscuroActivado
+
+        switchTemaOscuro.setOnCheckedChangeListener { _, isChecked ->
+            val editor = sharedPreferences.edit()
+            editor.putBoolean("temaOscuro", isChecked)
+            editor.apply()
+            aplicarTema()
+            recreate()  // Recargar la actividad para aplicar el cambio de tema
+        }
 
         // Configurar botón de copias de seguridad
         btnBackup.setOnClickListener {
@@ -42,6 +59,11 @@ class ConfiguracionActivity : AppCompatActivity() {
         btnVolver.setOnClickListener {
             finish()  // Simplemente termina la actividad para volver a MainActivity
         }
+    }
+
+    private fun aplicarTema() {
+        val temaOscuro = sharedPreferences.getBoolean("temaOscuro", false)
+        setTheme(if (temaOscuro) R.style.Theme_Feedback3_Night else R.style.Theme_Feedback3_Day)
     }
 
     private fun realizarCopiaDeSeguridad() {

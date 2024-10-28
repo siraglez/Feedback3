@@ -14,6 +14,13 @@
         android:textSize="24sp"
         android:layout_marginBottom="24dp" />
 
+    <Switch
+        android:id="@+id/switchTemaOscuro"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:minHeight="48dp"
+        android:text="Modo Oscuro" />
+
     <Button
         android:id="@+id/btnBackup"
         android:layout_width="match_parent"
