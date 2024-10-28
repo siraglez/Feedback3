@@ -1,5 +1,6 @@
 package com.example.feedback3.actividades
 
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
@@ -12,9 +13,13 @@ class AgregarResenaActivity : AppCompatActivity() {
     private lateinit var editTextResena: EditText
     private lateinit var btnGuardarResena: Button
     private lateinit var novelaDbHelper: NovelaDatabaseHelper
+    private lateinit var sharedPreferences: SharedPreferences
     private lateinit var tituloNovela: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        sharedPreferences = getSharedPreferences("UsuarioPreferences", MODE_PRIVATE)
+        aplicarTema()
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_agregar_resena)
 
@@ -39,5 +44,10 @@ class AgregarResenaActivity : AppCompatActivity() {
                 Toast.makeText(this, "Escribe una reseña", Toast.LENGTH_SHORT).show()
             }
         }
+    }
+
+    private fun aplicarTema() {
+        val temaOscuro = sharedPreferences.getBoolean("temaOscuro", false)
+        setTheme(if (temaOscuro) R.style.Theme_Feedback3_Night else R.style.Theme_Feedback3_Day)
     }
 }
